@@ -1,16 +1,32 @@
-import React from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
-//import { useFonts } from 'expo-font'; 
+import { useState } from 'react';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import { useFonts } from 'expo-font'; 
 
-export default function Login(){
+export default function Login({ navigation }){
+
+
+
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+
+  function logar(){
+    if(user === "" || pass === ""){
+      Alert.alert("ERRO", "Favor Preencher todos os campos");
+    } else if(user === "Victor" && pass === "123"){
+      Alert.alert("Sucesso!", "Usuário Logado com Sucesso!");
+      navigation.navigate("cadastro");
+    } else{
+      Alert.alert("ERRO!", "Usuário não Cadastrado!");
+    }
+  }
   
-  // const [fonts] = useFonts({ 
-  //       'marvel': require('../assets/fontes/marvel.ttf')  
-  // })
+  const [fonts] = useFonts({ 
+        'marvel': require('../assets/fontes/marvel.ttf')  
+  })
 
-  // if(!fonts){
-  //     return null;
-  // }
+  if(!fonts){
+      return null;
+  }
   
   return (
     <View style={styles.container}>
@@ -23,6 +39,8 @@ export default function Login(){
         style={styles.input}
         placeholder="Nome"
         placeholderTextColor="#999"
+        value={user}
+        onChangeText={setUser}
       />
       
       <TextInput
@@ -30,9 +48,11 @@ export default function Login(){
         placeholder="Senha"
         placeholderTextColor="#999"
         secureTextEntry={true}
+        value={pass}
+        onChangeText={setPass}
       />
       
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.loginBtn} onPress={logar}>
         <Text style={styles.buttonText}>ENTRAR</Text>
       </TouchableOpacity>
     </View>
@@ -78,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#333333',
     color: '#FFFFFF',
   },
-  button: {
+  loginBtn: {
     backgroundColor: '#FF0000',
     padding: 20,
     borderRadius: 8,

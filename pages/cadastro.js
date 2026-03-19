@@ -1,16 +1,35 @@
-import React from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
-//import { useFonts } from 'expo-font'; 
+import { useState } from 'react';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import { useFonts } from 'expo-font'; 
 
-export default function Cadastro(){
+export default function Cadastro({ navigation }){
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+
+  function cadastrar(){
+    if(nome === "" || email === "" || senha === "" || confirmarSenha === ""){
+      Alert.alert("ERRO", "Favor Preencher todos os campos");
+    } else if(senha !== confirmarSenha){
+      Alert.alert("ERRO", "As senhas não coincidem");
+    } else {
+      Alert.alert("Sucesso!", "Cadastro realizado com Sucesso!");
+      navigation.navigate("login");
+    }
+  }
+
+  function irParaLogin(){
+    navigation.navigate("Login");
+  }
   
-  // const [fonts] = useFonts({ 
-  //       'marvel': require('../assets/fontes/marvel.ttf')  
-  // })
+  const [fonts] = useFonts({ 
+        'marvel': require('../assets/fontes/marvel.ttf')  
+  })
 
-  // if(!fonts){
-  //     return null;
-  // }
+  if(!fonts){
+      return null;
+  }
   
   return (
     <View style={styles.container}>
@@ -23,6 +42,8 @@ export default function Cadastro(){
         style={styles.input}
         placeholder="Nome completo"
         placeholderTextColor="#999"
+        value={nome}
+        onChangeText={setNome}
       />
       
       <TextInput
@@ -31,6 +52,8 @@ export default function Cadastro(){
         placeholderTextColor="#999"
         keyboardType="email-address"
         autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
       />
       
       <TextInput
@@ -38,6 +61,8 @@ export default function Cadastro(){
         placeholder="Senha"
         placeholderTextColor="#999"
         secureTextEntry={true}
+        value={senha}
+        onChangeText={setSenha}
       />
       
       <TextInput
@@ -45,13 +70,15 @@ export default function Cadastro(){
         placeholder="Confirmar senha"
         placeholderTextColor="#999"
         secureTextEntry={true}
+        value={confirmarSenha}
+        onChangeText={setConfirmarSenha}
       />
       
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={cadastrar}>
         <Text style={styles.buttonText}>CADASTRAR</Text>
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.linkButton}>
+      <TouchableOpacity style={styles.linkButton} onPress={irParaLogin}>
         <Text style={styles.linkText}>Já tem uma conta? Faça login</Text>
       </TouchableOpacity>
     </View>

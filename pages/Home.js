@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function Home() {

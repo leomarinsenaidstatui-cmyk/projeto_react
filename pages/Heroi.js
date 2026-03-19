@@ -82,7 +82,7 @@ export default function CadastroHeroi() {
         {/* Linha 3: Senha e Email */}
         <View style={styles.linha}>
           <View style={styles.coluna}>
-            <Text style={styles.label}>Senha</Text>
+            <Text style={styles.label}>Idade</Text>
             <TextInput
               style={[styles.input, styles.inputMetade]}
               placeholder="Digite a senha"
@@ -94,7 +94,7 @@ export default function CadastroHeroi() {
           </View>
           
           <View style={styles.coluna}>
-            <Text style={styles.label}>Email</Text>
+            <Text style={styles.label}>Equipe</Text>
             <TextInput
               style={[styles.input, styles.inputMetade]}
               placeholder="Digite o email"
@@ -109,13 +109,10 @@ export default function CadastroHeroi() {
 
         {/* Botão ENTRAR */}
         <TouchableOpacity style={styles.button} onPress={handleCadastro}>
-          <Text style={styles.buttonText}>ENTRAR</Text>
+          <Text style={styles.buttonText}>Salvar</Text>
         </TouchableOpacity>
 
-        {/* Link para login existente */}
-        <TouchableOpacity style={styles.linkContainer}>
-          <Text style={styles.linkText}>Já tem cadastro? Faça login</Text>
-        </TouchableOpacity>
+        
       </View>
     </ScrollView>
   );

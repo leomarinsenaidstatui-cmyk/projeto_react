@@ -1,29 +1,72 @@
+import { Text } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Login from './pages/login';
 import Cadastro from './pages/cadastro';
 import Splash from './pages/splash';
-import Home from './pages/home';
+import Home from "./pages/Home";
 import Heroi from './pages/Heroi';
-const Stack = createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
 
-  
+ 
   return (
 
 <NavigationContainer>      
-<Stack.Navigator initialRouteName="Splash">
-<Stack.Screen name='Splash' component={Splash} options={{headerTransparent:true, headerTitle:'', headerSearchBarOptions:false}}/>
-<Stack.Screen name='Login' component={Login}options={{headerTransparent:true, headerTitle:'', headerSearchBarOptions:false}}/>
-<Stack.Screen name='Cadastro' component={Cadastro}options={{headerTransparent:true, headerTitle:'', headerSearchBarOptions:false}}/>
-<Stack.Screen name='Home' component={Home}options={{headerTransparent:true, headerTitle:'', headerSearchBarOptions:false}}/>
-<Stack.Screen name='Heroi' component={Heroi}options={{headerTransparent:true, headerTitle:'', headerSearchBarOptions:false}}/>
-</Stack.Navigator>
+<Drawer.Navigator initialRouteName="Splash" screenOptions={{headerTintColor:"white"}}>
+<Drawer.Screen
+  name='Splash'
+  component={Splash}
+  options={{
+    headerTransparent: true,
+    headerTitle: '',
+    headerSearchBarOptions: false,
+    drawerLabel: () => null,
+    drawerItemStyle: { display: 'none' },
+    swipeEnabled: false,
+  }}
+/>
+<Drawer.Screen
+  name='Login'
+  component={Login}
+  options={{
+    headerTransparent: true,
+    headerTitle: '',
+    headerSearchBarOptions: false
+  }}
+/>
+<Drawer.Screen
+  name='Cadastro'
+  component={Cadastro}
+  options={{
+    headerTransparent: true,
+    headerTitle: '',
+    headerSearchBarOptions: false
+  }}
+/>
+<Drawer.Screen
+  name='Home'
+  component={Home}
+  options={{
+    headerTransparent: true,
+    headerTitle: '',
+    headerSearchBarOptions: false
+  }}
+/>
+<Drawer.Screen
+  name='Heroi'
+  component={Heroi}
+  options={{
+    headerTransparent: true,
+    headerTitle: '',
+    headerSearchBarOptions: false
+  }}
+/>
+</Drawer.Navigator>
+</NavigationContainer>
 
-
-      </NavigationContainer>
    
    
   );

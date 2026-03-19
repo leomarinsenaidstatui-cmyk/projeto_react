@@ -47,7 +47,7 @@ imgBack:{
 flex:1,
 justifyContent:"center",
 alignItems:"center",
-backgroundColor:"#ffff"
+backgroundColor:"#2a2a2a"
 
 
 
