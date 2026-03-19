@@ -15,7 +15,7 @@ export default function Cadastro({ navigation }){
       Alert.alert("ERRO", "As senhas não coincidem");
     } else {
       Alert.alert("Sucesso!", "Cadastro realizado com Sucesso!");
-      navigation.navigate("login");
+      navigation.navigate("Login");
     }
   }
 
