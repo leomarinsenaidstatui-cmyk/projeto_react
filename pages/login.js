@@ -14,7 +14,7 @@ export default function Login({ navigation }){
       Alert.alert("ERRO", "Favor Preencher todos os campos");
     } else if(user === "Victor" && pass === "123"){
       Alert.alert("Sucesso!", "Usuário Logado com Sucesso!");
-      navigation.navigate("Home");
+      navigation.navigate("Cep");
     } else{
       Alert.alert("ERRO!", "Usuário não Cadastrado!");
     }
