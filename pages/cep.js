@@ -30,7 +30,11 @@ export default function Cep({ navigation }){
     const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
     console.log(response.data);
     
-   
+
+    setEndereco(response.data.logradouro);
+    setBairro(response.data.bairro);
+    setCidade(response.data.localidade);
+    setEstado(response.data.uf);
 
   }
 
@@ -38,9 +42,9 @@ export default function Cep({ navigation }){
   return (
     <View style={styles.container}>
       
-      <Text style={styles.titulo}>Busca Cep</Text>
+      <Text style={styles.titulo}>BUSCA CEP</Text>
       
-      <Text style={styles.subtitulo}>MARVEL</Text>
+    
       
     
       <TextInput
@@ -84,7 +88,7 @@ export default function Cep({ navigation }){
       />
       
       <TouchableOpacity style={styles.button} onPress={Buscar}>
-        <Text style={styles.buttonText}>CADASTRAR</Text>
+        <Text style={styles.buttonText}>Buscar</Text>
       </TouchableOpacity>
    
     </View>
@@ -100,29 +104,29 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontSize: 36,
-    color: "#FF0000",
+    color: "#0059ff",
     textAlign: 'center',
     fontWeight: '900',
     marginBottom: 5,
     letterSpacing: 2,
-    textShadowColor: 'rgba(255, 0, 0, 0.3)',
+    textShadowColor: 'rgba(0, 174, 255, 0.5)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
   },
   subtitulo: {
     fontSize: 42,
-    color: "#FF0000",
+    color: "#0059ff",
     textAlign: 'center',
     fontWeight: '900',
     marginBottom: 40,
     letterSpacing: 4,
-    textShadowColor: 'rgba(255, 0, 0, 0.5)',
+    textShadowColor: 'rgba(0, 174, 255, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },
   input: {
     borderWidth: 2,
-    borderColor: '#FF0000',
+    borderColor: '#0059ff',
     borderRadius: 8,
     padding: 15,
     marginBottom: 15,
@@ -131,12 +135,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   button: {
-    backgroundColor: '#FF0000',
+    backgroundColor: '#0059ff',
     padding: 18,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
-    shadowColor: '#FF0000',
+    shadowColor: '#0059ff',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   linkText: {
-    color: '#FF0000',
+    color: '#0059ff',
     fontSize: 16,
     fontWeight: '600',
     textDecorationLine: 'underline',

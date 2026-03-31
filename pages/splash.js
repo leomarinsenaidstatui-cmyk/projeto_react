@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { View, Image ,StyleSheet} from "react-native";
+import { View, Image , Text, StyleSheet} from "react-native";
 
 
 
@@ -25,7 +25,7 @@ export default function Splash({navigation}){
 
 
 
-<Image source={require('../assets/logonovo.png')}/> 
+<Image source={require('../assets/logocep.png')}/> 
 
 </View>
 
@@ -47,7 +47,7 @@ imgBack:{
 flex:1,
 justifyContent:"center",
 alignItems:"center",
-backgroundColor:"#2a2a2a"
+backgroundColor:"#000000"
 
 
 

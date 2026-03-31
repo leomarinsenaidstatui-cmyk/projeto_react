@@ -36,7 +36,6 @@ export default function Cadastro({ navigation }){
       
       <Text style={styles.titulo}>CRIAR CONTA</Text>
       
-      <Text style={styles.subtitulo}>MARVEL</Text>
       
       <TextInput
         style={styles.input}
@@ -94,29 +93,29 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontSize: 36,
-    color: "#FF0000",
+    color: "#0059FF",
     textAlign: 'center',
     fontWeight: '900',
     marginBottom: 5,
     letterSpacing: 2,
-    textShadowColor: 'rgba(255, 0, 0, 0.3)',
+    textShadowColor: 'rgba(0, 174, 255, 0.5)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
   },
   subtitulo: {
     fontSize: 42,
-    color: "#FF0000",
+    color: "#0059FF",
     textAlign: 'center',
     fontWeight: '900',
     marginBottom: 40,
     letterSpacing: 4,
-    textShadowColor: 'rgba(255, 0, 0, 0.5)',
+    textShadowColor: 'rgba(0, 174, 255, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },
   input: {
     borderWidth: 2,
-    borderColor: '#FF0000',
+    borderColor: '#0059FF',
     borderRadius: 8,
     padding: 15,
     marginBottom: 15,
@@ -125,12 +124,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   button: {
-    backgroundColor: '#FF0000',
+    backgroundColor: '#0059FF',
     padding: 18,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
-    shadowColor: '#FF0000',
+    shadowColor: '#0059FF',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   linkText: {
-    color: '#FF0000',
+    color: '#0059FF',
     fontSize: 16,
     fontWeight: '600',
     textDecorationLine: 'underline',

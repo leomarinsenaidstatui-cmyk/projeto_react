@@ -4,8 +4,6 @@ import { useFonts } from 'expo-font';
 
 export default function Login({ navigation }){
 
-
-
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
 
@@ -33,12 +31,12 @@ export default function Login({ navigation }){
       
       <Text style={styles.titulo}>LOGIN</Text>
       
-      <Text style={styles.subtitulo}>MARVEL</Text>
+    
       
       <TextInput
         style={styles.input}
         placeholder="Nome"
-        placeholderTextColor="#999"
+        placeholderTextColor="#666"
         value={user}
         onChangeText={setUser}
       />
@@ -46,7 +44,7 @@ export default function Login({ navigation }){
       <TextInput
         style={styles.input}
         placeholder="Senha"
-        placeholderTextColor="#999"
+        placeholderTextColor="#666"
         secureTextEntry={true}
         value={pass}
         onChangeText={setPass}
@@ -68,45 +66,45 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontSize: 52,
-    color: "#FF0000",
+    color: "#0059ff",
     textAlign: 'center',
     fontWeight: '900',
     marginBottom: 15,
     letterSpacing: 3,
-    textShadowColor: 'rgba(255, 0, 0, 0.5)',
+    textShadowColor: 'rgba(0, 174, 255, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },
   subtitulo: {
     fontSize: 48,
-    color: "#FF0000",
+    color: "#0059FF",
     textAlign: 'center',
     fontWeight: '900',
     marginBottom: 60,
     letterSpacing: 4,
-    textShadowColor: 'rgba(255, 0, 0, 0.5)',
+    textShadowColor: 'rgba(0, 174, 255, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
   },
   input: {
     borderWidth: 2,
-    borderColor: '#FF0000',
+    borderColor: '#0059FF',
     borderRadius: 8,
     padding: 18,
     marginBottom: 20,
     fontSize: 20,
-    backgroundColor: '#333333',
+    backgroundColor: '#1a1a1a',
     color: '#FFFFFF',
   },
   loginBtn: {
-    backgroundColor: '#FF0000',
+    backgroundColor: '#0059FF',
     padding: 20,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontWeight: 'bold',
     fontSize: 22,
   },

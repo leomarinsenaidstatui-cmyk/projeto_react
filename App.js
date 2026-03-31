@@ -5,8 +5,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Login from './pages/login';
 import Cadastro from './pages/cadastro';
 import Splash from './pages/splash';
-import Home from "./pages/Home";
-import Heroi from './pages/Heroi';
 import Cep from "./pages/cep";
 
 
@@ -49,24 +47,7 @@ export default function App() {
     headerSearchBarOptions: false
   }}
 />
-<Drawer.Screen
-  name='Home'
-  component={Home}
-  options={{
-    headerTransparent: true,
-    headerTitle: '',
-    headerSearchBarOptions: false
-  }}
-/>
-<Drawer.Screen
-  name='Heroi'
-  component={Heroi}
-  options={{
-    headerTransparent: true,
-    headerTitle: '',
-    headerSearchBarOptions: false
-  }}
-/>
+
 <Drawer.Screen
   name='Cep'
   component={Cep}
