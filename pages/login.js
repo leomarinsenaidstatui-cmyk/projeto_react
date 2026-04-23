@@ -1,46 +1,67 @@
 import { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
-import { useFonts } from 'expo-font'; 
+import { useFonts } from 'expo-font';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios';
 
 export default function Login({ navigation }){
-
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  function logar(){
-    if(user === "" || pass === ""){
-      Alert.alert("ERRO", "Favor Preencher todos os campos");
-    } else if(user === "Victor" && pass === "123"){
-      Alert.alert("Sucesso!", "Usuário Logado com Sucesso!");
-      navigation.navigate("Cep");
-    } else{
-      Alert.alert("ERRO!", "Usuário não Cadastrado!");
+  async function Logar() {
+    console.log("Botao login pressionado");
+
+    if(email === "" || pass === ""){
+      Alert.alert("ERRO", "Favor preencher todos os campos!");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://10.122.41.159:8000/api/login_novo", {
+        email: email,
+        senha: pass,
+      });
+
+      console.log(response.data);
+
+      if(response.data.token){
+        await AsyncStorage.setItem('token', response.data.token);
+        Alert.alert("Sucesso", "Login realizado com sucesso!");
+        navigation.navigate("Cep");
+      } else {
+        Alert.alert("ERRO", response.data.msg || "Nao foi possivel fazer login.");
+      }
+    } catch (error) {
+      console.log("ERRO", error.response?.data || error.message);
+      Alert.alert(
+        "ERRO",
+        error.response?.data?.msg ||
+        error.response?.data?.message ||
+        "Falha na conexao com o servidor"
+      );
     }
   }
-  
-  const [fonts] = useFonts({ 
-        'marvel': require('../assets/fontes/marvel.ttf')  
-  })
+
+  const [fonts] = useFonts({
+    'marvel': require('../assets/fontes/marvel.ttf')
+  });
 
   if(!fonts){
-      return null;
+    return null;
   }
-  
+
   return (
     <View style={styles.container}>
-      
       <Text style={styles.titulo}>LOGIN</Text>
-      
-    
-      
+
       <TextInput
         style={styles.input}
-        placeholder="Nome"
+        placeholder="Email"
         placeholderTextColor="#666"
-        value={user}
-        onChangeText={setUser}
+        value={email}
+        onChangeText={setEmail}
       />
-      
+
       <TextInput
         style={styles.input}
         placeholder="Senha"
@@ -49,8 +70,8 @@ export default function Login({ navigation }){
         value={pass}
         onChangeText={setPass}
       />
-      
-      <TouchableOpacity style={styles.loginBtn} onPress={logar}>
+
+      <TouchableOpacity style={styles.loginBtn} onPress={Logar}>
         <Text style={styles.buttonText}>ENTRAR</Text>
       </TouchableOpacity>
     </View>
@@ -71,17 +92,6 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     marginBottom: 15,
     letterSpacing: 3,
-    textShadowColor: 'rgba(0, 174, 255, 0.5)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
-  },
-  subtitulo: {
-    fontSize: 48,
-    color: "#0059FF",
-    textAlign: 'center',
-    fontWeight: '900',
-    marginBottom: 60,
-    letterSpacing: 4,
     textShadowColor: 'rgba(0, 174, 255, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,

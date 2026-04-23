@@ -1,42 +1,85 @@
 import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from "axios";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
-import { useFonts } from 'expo-font'; 
+import { useFonts } from 'expo-font';
 
-export default function Cadastro({ navigation }){
+export default function Cadastro({ navigation }) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [datanascimento, setDatanascimento] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [genero, setGenero] = useState("");
 
-  function cadastrar(){
-    if(nome === "" || email === "" || senha === "" || confirmarSenha === ""){
-      Alert.alert("ERRO", "Favor Preencher todos os campos");
-    } else if(senha !== confirmarSenha){
-      Alert.alert("ERRO", "As senhas não coincidem");
-    } else {
-      Alert.alert("Sucesso!", "Cadastro realizado com Sucesso!");
+  function formatApi(data) {
+    if (!data || !data.includes("/")) {
+      return null;
+    }
+
+    const [dia, mes, ano] = data.split("/");
+    if (!dia || !mes || !ano) {
+      return null;
+    }
+
+    return `${ano}-${mes}-${dia}`;
+  }
+
+  async function Cadastrar() {
+    if (nome === "" || email === "" || senha === "" || confirmarSenha === "") {
+      Alert.alert("ERRO", "Favor preencher todos os campos");
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      Alert.alert("ERRO", "As senhas nao coincidem");
+      return;
+    }
+
+    if (datanascimento !== "" && !formatApi(datanascimento)) {
+      Alert.alert("ERRO", "Informe a data no formato DD/MM/AAAA");
+      return;
+    }
+
+    const values = {
+      nome,
+      email,
+      senha,
+      confirmarSenha,
+      datanascimento: formatApi(datanascimento),
+      genero,
+      telefone,
+    };
+
+    try {
+      const response = await axios.post('http://10.122.41.159:8000/cadastro_usuario', values);
+      console.log(response.data);
+
+      Alert.alert("Sucesso!", "Usuario cadastrado com sucesso!");
       navigation.navigate("Login");
+    } catch (error) {
+      console.log("ERRO", error.response?.data?.errors || error.message);
+      Alert.alert("ERRO", "Falha no cadastro. Verifique os dados.");
     }
   }
 
-  function irParaLogin(){
+  function irParaLogin() {
     navigation.navigate("Login");
   }
-  
-  const [fonts] = useFonts({ 
-        'marvel': require('../assets/fontes/marvel.ttf')  
-  })
 
-  if(!fonts){
-      return null;
+  const [fonts] = useFonts({
+    marvel: require('../assets/fontes/marvel.ttf')
+  });
+
+  if (!fonts) {
+    return null;
   }
-  
+
   return (
     <View style={styles.container}>
-      
       <Text style={styles.titulo}>CRIAR CONTA</Text>
-      
-      
+
       <TextInput
         style={styles.input}
         placeholder="Nome completo"
@@ -44,7 +87,7 @@ export default function Cadastro({ navigation }){
         value={nome}
         onChangeText={setNome}
       />
-      
+
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -54,7 +97,7 @@ export default function Cadastro({ navigation }){
         value={email}
         onChangeText={setEmail}
       />
-      
+
       <TextInput
         style={styles.input}
         placeholder="Senha"
@@ -63,7 +106,7 @@ export default function Cadastro({ navigation }){
         value={senha}
         onChangeText={setSenha}
       />
-      
+
       <TextInput
         style={styles.input}
         placeholder="Confirmar senha"
@@ -72,17 +115,41 @@ export default function Cadastro({ navigation }){
         value={confirmarSenha}
         onChangeText={setConfirmarSenha}
       />
-      
-      <TouchableOpacity style={styles.button} onPress={cadastrar}>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Data de nascimento (DD/MM/AAAA)"
+        placeholderTextColor="#999"
+        value={datanascimento}
+        onChangeText={setDatanascimento}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Genero"
+        placeholderTextColor="#999"
+        value={genero}
+        onChangeText={setGenero}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Telefone"
+        placeholderTextColor="#999"
+        value={telefone}
+        onChangeText={setTelefone}
+      />
+
+      <TouchableOpacity style={styles.button} onPress={Cadastrar}>
         <Text style={styles.buttonText}>CADASTRAR</Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity style={styles.linkButton} onPress={irParaLogin}>
-        <Text style={styles.linkText}>Já tem uma conta? Faça login</Text>
+        <Text style={styles.linkText}>Ja tem uma conta? Faca login</Text>
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

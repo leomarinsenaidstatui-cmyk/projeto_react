@@ -27,7 +27,8 @@ export default function Cep({ navigation }){
 
   async function Buscar(){
 
-    const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+    
+    const response = await axios.get(`http://10.122.41.159:9000/consulta_cep/${cep}`);
     console.log(response.data);
     
 
